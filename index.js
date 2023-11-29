@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
-app.use(express.json())
 
 // Set the JSON spaces for indentation (2 spaces in this example)
 app.set('json spaces', 2);
@@ -48,7 +47,7 @@ let notes = [
     })
   
   
-    app.get('/notes', (request, response) => {
+    app.get('/api/notes', (request, response) => {
         response.json(notes)
     })
 
@@ -59,7 +58,7 @@ let notes = [
         return maxId + 1
       }
       
-      app.post('/notes', (request, response) => {
+      app.post('/api/notes', (request, response) => {
         const body = request.body
       
         if (!body.content) {
@@ -79,7 +78,7 @@ let notes = [
         response.json(note)
       })
 
-    app.get('/notes/:id', (request, response) => {
+    app.get('/api/notes/:id', (request, response) => {
         const id = Number(request.params.id)
         const note = notes.find(note => note.id === id)
   
@@ -90,7 +89,7 @@ let notes = [
         }
     })
     
-    app.delete('/notes/:id', (request, response) => {
+    app.delete('/api/notes/:id', (request, response) => {
         const id = Number(request.params.id)
         notes = notes.filter(note => note.id !== id)
   
