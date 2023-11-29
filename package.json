@@ -16,6 +16,8 @@
   "scripts": {
     "start": "node index.js",
     "build": "react-scripts build",
+    "build:ui": "rm -rf dist && cd ../frontend && npm run build && cp -r dist ../backend",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "eject": "react-scripts eject"
