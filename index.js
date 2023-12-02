@@ -1,6 +1,9 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const mongoose = require('mongoose')
+const Note = require('./models/note')
 
 // Set the JSON spaces for indentation (2 spaces in this example)
 app.set('json spaces', 2);
@@ -48,8 +51,14 @@ let notes = [
     })
   
   
+    // app.get('/api/notes', (request, response) => {
+    //     response.json(notes)
+    // })
+
     app.get('/api/notes', (request, response) => {
+      Note.find({}).then(notes => {
         response.json(notes)
+      })
     })
 
     const generateId = () => {
@@ -98,6 +107,9 @@ let notes = [
     })
 
     app.use(unknownEndpoint)
+
+    
+
     
   
 const PORT = process.env.PORT || 3001
